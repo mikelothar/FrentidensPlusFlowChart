@@ -12,6 +12,77 @@
       startOnLoad: true
     });
   </script>
+  
+  <style>
+
+body {
+  font-family: "Roboto";
+  font-size: 16px;
+  padding: 40px;
+}
+
+.mermaid * {
+  font-family: "Roboto" !important;
+}
+
+.mermaid .cluster rect {
+  fill: #fffff0;
+  stroke: black !important;
+}
+.mermaid .cluster .nodeLabel {
+  color: black !important;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.mermaid polygon + g .nodeLabel {
+  color: black !important;
+}
+
+.mermaid .edgeLabel {
+  background-color: #d7e0ff !important;
+}
+
+.mermaid .node polygon {
+  fill: #d7e0ff !important;
+  stroke: #d7e0ff !important;
+}
+.mermaid .node polygon + g .nodeLabel {
+  color: black !important;
+}
+
+.mermaid .node rect {
+  fill: #62bd93 !important;
+  stroke: #62bd93 !important;
+}
+.mermaid .node rect + g .nodeLabel {
+  color: white !important;
+}
+
+.mermaid .edgeLabel {
+  background-color: #ffffff;
+  text-align: left;
+  opacity: 1 !important;
+}
+
+.mermaid .label {
+  padding: 1rem 0.25rem !important;
+}
+
+foreignObject > div,
+circle {
+  padding: -10% 0 !important;
+}
+
+svg {
+  overflow: auto !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+    
+    
+  </style>
+  
 </head>
 
 <body>
@@ -20,6 +91,8 @@
   
 
 // https://codepen.io/mikelothar/pen/wvjRxNw?editors=0010
+// https://www.zenflowchart.com/flowchart
+
 const mermaid = document.querySelector(".mermaid");
 mermaid.innerHTML = `
 
@@ -47,11 +120,11 @@ subgraph RoedKonto[Rød konto]
 end
 
 subgraph PlusVaelgSpil[PLUS Vælg Selv]
-  PlusVaelgSpilOversigt[Oversigt]
+  PlusVaelgSpilOversigt(Oversigt)
 end
 
 subgraph MinPlusSide
-  MinPlusSideOversigt[Oversigt]
+  MinPlusSideOversigt(Oversigt)
 end
 
 %% Gå til oversigt %%
@@ -59,7 +132,7 @@ SeKurv & LogIn & VaelgBetaling & OpretBetalingsplan & Kvittering -.-> PlusVaelgS
 
 %% Main flow %%
 PlusVaelgSpil ==> SeKurv
-Kvittering ==> MinPlusSide
+Kvittering ==> MinPlusSideOversigt
 
 %% Signup flow %%
 SeKurv ==> IsLoggedIn
