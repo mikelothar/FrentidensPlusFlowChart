@@ -1,3 +1,3 @@
 # FrentidensPlusFlowChart
 
-https://mikelothar.github.io/FrentidensPlusFlowChart/
+https://mikelothar.github.io/fremtidens-plus-flowchart/
