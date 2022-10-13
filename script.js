@@ -1,15 +1,15 @@
-// https://codepen.io/mikelothar/pen/wvjRxNw
-
+// https://codepen.io/mikelothar/pen/wvjRxNw?editors=0010
 const mermaid = document.querySelector(".mermaid");
-
 mermaid.innerHTML = `
 
 flowchart LR
 
 subgraph SignupFlow [Fremtidens Plus]
   SeKurv[Se kurv]
+  IsLoggedIn{Er logget ind?}
+  PaymentChosen{Betalingsmetode?}
   LogIn[Log ind]
-  VaelgBetaling{Vælg betaling}
+  VaelgBetaling[Vælg betaling]
   OpretBetalingsplan[Opret betalingsplan]
   Kvittering
 end
@@ -41,14 +41,15 @@ PlusVaelgSpil ==> SeKurv
 Kvittering ==> MinPlusSide
 
 %% Signup flow %%
-LogIn ==> |Logget ind| VaelgBetaling
-SeKurv ==> |Logget ind| VaelgBetaling
-SeKurv ==> |Logget ud| LogIn
-
-VaelgBetaling ==> |Kreditkort| OpretBetalingsplan
+SeKurv ==> IsLoggedIn
+LogIn ==> VaelgBetaling
+IsLoggedIn ==> |Nej| LogIn
+IsLoggedIn ==> |Ja| VaelgBetaling
+VaelgBetaling ==> PaymentChosen
+PaymentChosen ==> |Kreditkort| OpretBetalingsplan
 OpretBetalingsplan ==> DibsWithdrawMoney
 DibsWithdrawMoney ==> Kvittering
-VaelgBetaling ==> |Betalingsservice| Kvittering
+PaymentChosen ==> |Betalingsservice| Kvittering
 
 %% LogIn flow %%
 LogIn -.-> RoedKontoOpretKonto
